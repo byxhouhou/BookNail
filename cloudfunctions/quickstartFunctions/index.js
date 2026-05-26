@@ -1,4 +1,5 @@
 const cloud = require("wx-server-sdk");
+const crypto = require("crypto");
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -6,7 +7,12 @@ cloud.init({
 
 const db = cloud.database();
 const APPOINTMENTS_COLLECTION = "appointments";
+const OWNERS_COLLECTION = "owners";
 const MAX_LIMIT = 100;
+const DEFAULT_OWNER = {
+  username: "mishiqi",
+  password: "mishiqi8888@"
+};
 
 const success = (data = null) => ({
   success: true,
@@ -17,6 +23,11 @@ const fail = (errMsg) => ({
   success: false,
   errMsg
 });
+
+const hashPassword = (password) => crypto
+  .createHash("sha256")
+  .update(`${password}`)
+  .digest("hex");
 
 const ensureCollection = async (name) => {
   try {
@@ -41,8 +52,78 @@ const getAllAppointments = async (where = {}) => {
   return result.data || [];
 };
 
+const ensureOwnerSeed = async () => {
+  await ensureCollection(OWNERS_COLLECTION);
+
+  const result = await db
+    .collection(OWNERS_COLLECTION)
+    .where({
+      username: DEFAULT_OWNER.username
+    })
+    .limit(1)
+    .get();
+
+  if (result.data.length) {
+    return success({
+      username: DEFAULT_OWNER.username,
+      existed: true
+    });
+  }
+
+  await db.collection(OWNERS_COLLECTION).add({
+    data: {
+      username: DEFAULT_OWNER.username,
+      passwordHash: hashPassword(DEFAULT_OWNER.password),
+      role: "owner",
+      enabled: true,
+      createdAt: new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })
+    }
+  });
+
+  return success({
+    username: DEFAULT_OWNER.username,
+    existed: false
+  });
+};
+
+const loginOwner = async (event) => {
+  await ensureOwnerSeed();
+
+  const { username, password } = event.data || {};
+  if (!username || !password) {
+    return fail("请输入账号和密码");
+  }
+
+  const result = await db
+    .collection(OWNERS_COLLECTION)
+    .where({
+      username: `${username}`.trim()
+    })
+    .limit(1)
+    .get();
+
+  if (!result.data.length) {
+    return fail("账号或密码错误");
+  }
+
+  const owner = result.data[0];
+  if (!owner.enabled) {
+    return fail("账号已停用");
+  }
+
+  if (owner.passwordHash !== hashPassword(password)) {
+    return fail("账号或密码错误");
+  }
+
+  return success({
+    username: owner.username,
+    role: owner.role || "owner"
+  });
+};
+
 const ensureAppointmentSeed = async (event) => {
   await ensureCollection(APPOINTMENTS_COLLECTION);
+  await ensureOwnerSeed();
 
   const { date, seedAppointments = [] } = event.data || {};
   if (!date || !seedAppointments.length) {
@@ -71,7 +152,8 @@ const ensureAppointmentSeed = async (event) => {
         ...item,
         date,
         createdAt: now,
-        isSeed: true
+        isSeed: true,
+        isBlocked: false
       }
     });
   }
@@ -118,7 +200,7 @@ const addAppointment = async (event) => {
     .get();
 
   if (existing.data.length) {
-    return fail("该时段已被预约");
+    return fail("该时段已被占用");
   }
 
   const wxContext = cloud.getWXContext();
@@ -171,6 +253,10 @@ const getOpenId = async () => {
 exports.main = async (event) => {
   try {
     switch (event.type) {
+      case "ensureOwnerSeed":
+        return await ensureOwnerSeed();
+      case "loginOwner":
+        return await loginOwner(event);
       case "ensureAppointmentSeed":
         return await ensureAppointmentSeed(event);
       case "listAppointments":

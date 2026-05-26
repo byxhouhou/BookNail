@@ -5,10 +5,6 @@ App({
     cloudEnvId: "",
     cloudFunctionName: "quickstartFunctions",
     ownerSessionKey: "nailOwnerLoggedIn",
-    ownerAccount: {
-      username: "mishiqi",
-      password: "mishiqi8888@"
-    },
     timeSlots: [
       "12:00",
       "13:00",
@@ -56,10 +52,10 @@ App({
       {
         id: "seed-1",
         date: "",
-        time: "10:30",
-        serviceId: "solid-color,french-full",
-        serviceName: "纯色 + 法式（全手）",
-        priceLabel: "5.3W",
+        time: "13:00",
+        serviceId: "基础项目-纯色,设计效果-法式",
+        serviceName: "纯色 + 法式",
+        priceLabel: "53000₩",
         name: "已预约客户",
         phone: "保密",
         note: "门店预留",
@@ -69,9 +65,9 @@ App({
         id: "seed-2",
         date: "",
         time: "15:00",
-        serviceId: "extension-half,cat-eye",
+        serviceId: "基础项目-甲片延长-半贴,设计效果-猫眼",
         serviceName: "甲片延长（半贴） + 猫眼",
-        priceLabel: "4W",
+        priceLabel: "40000₩",
         name: "已预约客户",
         phone: "保密",
         note: "门店预留",
@@ -223,9 +219,11 @@ App({
     return { id };
   },
 
-  verifyOwner(username, password) {
-    const account = this.globalData.ownerAccount;
-    return username.trim() === account.username && password === account.password;
+  async loginOwner(username, password) {
+    return await this.callCloud("loginOwner", {
+      username: username.trim(),
+      password
+    });
   },
 
   isOwnerLoggedIn() {

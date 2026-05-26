@@ -21,7 +21,7 @@ Page({
     });
   },
 
-  login() {
+  async login() {
     if (this.data.loggedIn) {
       wx.navigateTo({
         url: "/pages/owner-appointments/owner-appointments"
@@ -39,21 +39,27 @@ Page({
       return;
     }
 
-    if (!app.verifyOwner(username, password)) {
+    wx.showLoading({
+      title: "登录中"
+    });
+
+    try {
+      await app.loginOwner(username, password);
+      app.setOwnerLoggedIn(true);
+      wx.hideLoading();
+      this.setData({
+        loggedIn: true,
+        password: ""
+      });
+      wx.navigateTo({
+        url: "/pages/owner-appointments/owner-appointments"
+      });
+    } catch (error) {
+      wx.hideLoading();
       wx.showToast({
-        title: "账号或密码错误",
+        title: error.message || "登录失败",
         icon: "none"
       });
-      return;
     }
-
-    app.setOwnerLoggedIn(true);
-    this.setData({
-      loggedIn: true,
-      password: ""
-    });
-    wx.navigateTo({
-      url: "/pages/owner-appointments/owner-appointments"
-    });
   }
 });

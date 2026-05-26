@@ -37,9 +37,14 @@
 
 ## 云开发连接
 
-当前版本已通过 `cloudfunctions/quickstartFunctions` 接入微信云开发，预约数据保存到云数据库 `appointments` 集合。
+当前版本已通过 `cloudfunctions/quickstartFunctions` 接入微信云开发。
 
-首次启动会调用云函数自动创建 `appointments` 集合，并写入当天两个演示占用时段。
+云数据库集合：
+
+- `appointments`：预约和店主休息占用数据
+- `owners`：店主账号数据
+
+首次启动会调用云函数自动创建 `appointments` 和 `owners` 集合，并写入默认店主账号。
 
 如果你的项目只有一个默认云环境，`app.js` 中无需额外配置。若有多个云环境，请在 `app.js` 里设置：
 
@@ -61,4 +66,4 @@ cloudEnvId: "你的云环境 ID"
 - 账号：mishiqi
 - 密码：mishiqi8888@
 
-当前账号校验在小程序本地完成。正式上线建议把店主身份校验迁移到云函数或后端服务中。
+店主账号由云函数初始化到 `owners` 集合，小程序前端不再保存明文密码。登录时通过云函数校验账号密码。
