@@ -1,0 +1,71 @@
+.owner-login-page {
+  padding-bottom: 64rpx;
+}
+
+.login-hero {
+  display: flex;
+  align-items: center;
+  min-height: 250rpx;
+  padding: 34rpx;
+  border-radius: 8rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2f7785 0%, #6fb5a8 58%, #e1b86d 100%);
+}
+
+.login-kicker {
+  margin-bottom: 16rpx;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  opacity: 0.9;
+}
+
+.login-title {
+  font-size: 46rpx;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+.login-copy {
+  max-width: 520rpx;
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.login-panel {
+  margin-top: 28rpx;
+  padding: 26rpx;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  min-height: 88rpx;
+  margin-bottom: 18rpx;
+  padding: 0 20rpx;
+  border: 2rpx solid #f1dce2;
+  border-radius: 8rpx;
+  background: #fffafb;
+}
+
+.field-label {
+  flex: 0 0 112rpx;
+  color: #5f5356;
+  font-weight: 700;
+}
+
+.field input {
+  flex: 1;
+  min-height: 84rpx;
+}
+
+.demo-tip {
+  margin-top: 18rpx;
+  color: #8a7d80;
+  font-size: 24rpx;
+  text-align: center;
+}

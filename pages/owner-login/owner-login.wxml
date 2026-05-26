@@ -1,0 +1,26 @@
+<view class="page-shell owner-login-page">
+  <view class="login-hero">
+    <view>
+      <view class="login-kicker">OWNER</view>
+      <view class="login-title">店主预约管理</view>
+      <view class="login-copy">登录后查看全部预约信息、客户联系方式和备注。</view>
+    </view>
+  </view>
+
+  <view class="login-panel">
+    <view class="section-title">
+      <text>账号登录</text>
+    </view>
+    <view wx:if="{{!loggedIn}}">
+      <view class="field">
+        <text class="field-label">账号</text>
+        <input value="{{username}}" placeholder="请输入店主账号" bindinput="onInput" data-field="username" />
+      </view>
+      <view class="field">
+        <text class="field-label">密码</text>
+        <input value="{{password}}" password placeholder="请输入密码" bindinput="onInput" data-field="password" />
+      </view>
+    </view>
+    <button class="primary-button" bindtap="login">{{loggedIn ? "进入管理" : "登录"}}</button>
+  </view>
+</view>

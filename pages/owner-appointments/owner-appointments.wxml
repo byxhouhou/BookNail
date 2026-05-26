@@ -1,0 +1,95 @@
+<view class="page-shell owner-appointments-page">
+  <view class="manager-summary">
+    <view>
+      <view class="manager-title">预约管理</view>
+      <view class="manager-copy">查看客户预约，也可以设置休息时段占用可预约时间。</view>
+    </view>
+    <view class="manager-count">{{appointments.length}}</view>
+  </view>
+
+  <view class="manager-actions">
+    <button class="outline-button" bindtap="reload">刷新</button>
+    <button class="outline-button danger" bindtap="logout">退出登录</button>
+  </view>
+
+  <view class="rest-panel">
+    <view class="section-title">
+      <text>设置休息</text>
+      <text class="pill">{{selectedRestDateLabel}}</text>
+    </view>
+    <scroll-view scroll-x class="date-scroll" enable-flex>
+      <view
+        wx:for="{{dateOptions}}"
+        wx:key="value"
+        class="date-item {{selectedRestDate === item.value ? 'active' : ''}}"
+        bindtap="onSelectRestDate"
+        data-date="{{item.value}}"
+      >
+        <text class="date-week">{{item.week}}</text>
+        <text class="date-day">{{item.monthDay}}</text>
+      </view>
+    </scroll-view>
+    <view class="rest-time-grid">
+      <view
+        wx:for="{{restTimeSlots}}"
+        wx:key="time"
+        class="rest-time-slot {{item.booked ? 'booked' : ''}} {{selectedRestTime === item.time ? 'active' : ''}}"
+        bindtap="onSelectRestTime"
+        data-time="{{item.time}}"
+      >
+        <text>{{item.time}}</text>
+        <text class="slot-status">{{item.statusText}}</text>
+      </view>
+    </view>
+    <view class="rest-actions">
+      <button class="rest-action-button primary {{selectedRestTime ? '' : 'is-disabled'}}" bindtap="setRestSlot">设为休息</button>
+      <button class="rest-action-button danger" bindtap="cancelSelectedSlot">取消占用</button>
+      <button class="rest-action-button secondary" bindtap="setFullDayRest">全天休息</button>
+    </view>
+  </view>
+
+  <view wx:if="{{appointments.length}}" class="appointment-list">
+    <view wx:for="{{appointments}}" wx:key="id" class="appointment-item {{item.isBlocked ? 'rest-item' : ''}}">
+      <view class="appointment-main">
+        <view>
+          <view class="appointment-time">{{item.date}} {{item.time}}</view>
+          <view class="appointment-service">{{item.serviceName}}</view>
+          <view wx:if="{{item.priceLabel}}" class="appointment-price">预估：{{item.priceLabel}}</view>
+        </view>
+        <view class="status-tag {{item.isBlocked ? 'rest' : ''}}">{{item.isBlocked ? '休息' : '已预约'}}</view>
+      </view>
+
+      <view wx:if="{{!item.isBlocked}}" class="info-row">
+        <text class="info-label">客户</text>
+        <text>{{item.name}}</text>
+      </view>
+      <view wx:if="{{!item.isBlocked}}" class="info-row">
+        <text class="info-label">微信/手机</text>
+        <text>{{item.phone}}</text>
+      </view>
+      <view wx:if="{{item.note}}" class="appointment-note">{{item.note}}</view>
+
+      <view wx:if="{{!item.isSeed}}" class="appointment-actions">
+        <button
+          wx:if="{{item.isBlocked}}"
+          class="release-button"
+          bindtap="deleteAppointment"
+          data-id="{{item.id}}"
+          data-blocked="{{item.isBlocked}}"
+        >释放休息</button>
+        <button
+          wx:else
+          class="cancel-appointment-button"
+          bindtap="deleteAppointment"
+          data-id="{{item.id}}"
+          data-blocked="{{item.isBlocked}}"
+        >取消预约</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <view class="empty-title">暂无预约</view>
+    <view class="empty-copy">有客户完成预约或设置休息后会显示在这里。</view>
+  </view>
+</view>

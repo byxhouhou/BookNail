@@ -1,0 +1,141 @@
+.appointments-page {
+  padding-bottom: 64rpx;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 190rpx;
+  padding: 30rpx;
+  border-radius: 8rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2f7785 0%, #6fb5a8 58%, #e1b86d 100%);
+}
+
+.summary-title {
+  font-size: 42rpx;
+  font-weight: 800;
+}
+
+.summary-copy {
+  max-width: 460rpx;
+  margin-top: 14rpx;
+  font-size: 25rpx;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.summary-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 112rpx;
+  height: 112rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 42rpx;
+  font-weight: 800;
+}
+
+.appointment-list {
+  margin-top: 26rpx;
+}
+
+.appointment-item {
+  margin-bottom: 20rpx;
+  padding: 26rpx;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.appointment-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.appointment-time {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.appointment-service {
+  margin-top: 10rpx;
+  color: #d75f7a;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.appointment-price {
+  margin-top: 8rpx;
+  color: #5f5356;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.status-tag {
+  flex: 0 0 auto;
+  padding: 9rpx 16rpx;
+  border-radius: 999rpx;
+  color: #2f7785;
+  background: #e8f5f3;
+  font-size: 23rpx;
+}
+
+.appointment-detail {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 18rpx;
+  color: #6f6366;
+  font-size: 25rpx;
+}
+
+.appointment-note {
+  margin-top: 16rpx;
+  padding: 18rpx;
+  border-radius: 8rpx;
+  color: #6f6366;
+  background: #fff7f8;
+  font-size: 25rpx;
+  line-height: 1.45;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180rpx;
+  height: 62rpx;
+  margin-top: 20rpx;
+  margin-left: auto;
+  border-radius: 8rpx;
+  color: #d75f7a;
+  background: #fff0f4;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 420rpx;
+  margin-top: 28rpx;
+  border: 2rpx dashed #e9ccd4;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.empty-title {
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.empty-copy {
+  margin-top: 14rpx;
+  color: #8a7d80;
+}

@@ -1,0 +1,283 @@
+.booking-page {
+  padding-bottom: 64rpx;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 260rpx;
+  padding: 34rpx;
+  border-radius: 8rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #c34864 0%, #e99a8f 58%, #f4c48d 100%);
+}
+
+.hero-kicker {
+  margin-bottom: 16rpx;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  opacity: 0.9;
+}
+
+.hero-title {
+  max-width: 470rpx;
+  font-size: 46rpx;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+.hero-copy {
+  max-width: 470rpx;
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  line-height: 1.5;
+  opacity: 0.88;
+}
+
+.hero-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 126rpx;
+  height: 126rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.hero-badge-number {
+  font-size: 42rpx;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.date-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.date-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 132rpx;
+  height: 124rpx;
+  margin-right: 16rpx;
+  border: 2rpx solid #f3dde2;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.date-item.active {
+  border-color: #d75f7a;
+  color: #d75f7a;
+  background: #fff0f4;
+}
+
+.date-week {
+  font-size: 24rpx;
+  color: #8a7d80;
+}
+
+.date-day {
+  margin-top: 10rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18rpx;
+}
+
+.service-list.single-column {
+  grid-template-columns: 1fr;
+}
+
+.service-group {
+  margin-bottom: 24rpx;
+}
+
+.service-group-title {
+  margin-bottom: 14rpx;
+  color: #5f5356;
+  font-size: 27rpx;
+  font-weight: 800;
+}
+
+.service-item {
+  min-height: 118rpx;
+  padding: 20rpx;
+  border: 2rpx solid #f1dce2;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.service-item.active {
+  border-color: #d75f7a;
+  background: #fff0f4;
+}
+
+.service-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 14rpx;
+}
+
+.check-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34rpx;
+  width: 34rpx;
+  height: 34rpx;
+  margin-top: 2rpx;
+  border: 2rpx solid #e2c9d0;
+  border-radius: 50%;
+  color: #ffffff;
+  background: #ffffff;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.service-item.active .check-dot {
+  border-color: #d75f7a;
+  background: #d75f7a;
+}
+
+.service-name {
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.service-meta {
+  margin-top: 10rpx;
+  color: #d75f7a;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.service-detail {
+  margin-top: 8rpx;
+  color: #8a7d80;
+  font-size: 22rpx;
+  line-height: 1.35;
+}
+
+.service-price {
+  margin-top: 16rpx;
+  color: #d75f7a;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.selected-summary {
+  padding: 22rpx;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.selected-title {
+  color: #8a7d80;
+  font-size: 24rpx;
+}
+
+.selected-names {
+  margin-top: 10rpx;
+  color: #2f292b;
+  font-size: 27rpx;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.selected-price {
+  margin-top: 12rpx;
+  color: #d75f7a;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.small-text {
+  font-size: 24rpx;
+  font-weight: 400;
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16rpx;
+}
+
+.time-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  border: 2rpx solid #f1dce2;
+  border-radius: 8rpx;
+  background: #ffffff;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.time-slot.active {
+  border-color: #d75f7a;
+  color: #ffffff;
+  background: #d75f7a;
+}
+
+.time-slot.booked {
+  color: #9e9295;
+  border-color: #e5dadd;
+  background: #eee8ea;
+}
+
+.slot-status {
+  margin-top: 8rpx;
+  font-size: 21rpx;
+  font-weight: 500;
+}
+
+.form-panel {
+  padding: 26rpx;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  min-height: 88rpx;
+  margin-bottom: 18rpx;
+  padding: 0 20rpx;
+  border: 2rpx solid #f1dce2;
+  border-radius: 8rpx;
+  background: #fffafb;
+}
+
+.field-label {
+  flex: 0 0 112rpx;
+  color: #5f5356;
+  font-weight: 700;
+}
+
+.field input {
+  flex: 1;
+  min-height: 84rpx;
+}
+
+.textarea-field {
+  align-items: flex-start;
+  padding-top: 24rpx;
+}
+
+.textarea-field textarea {
+  flex: 1;
+  height: 128rpx;
+}

@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/booking/booking",
+    "pages/my/my",
+    "pages/owner-login/owner-login",
+    "pages/owner-appointments/owner-appointments"
+  ],
+  "window": {
+    "navigationBarTitleText": "指尖花园",
+    "navigationBarBackgroundColor": "#fff7f8",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fff7f8",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#7b6f72",
+    "selectedColor": "#d75f7a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/booking/booking",
+        "text": "预约"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      },
+      {
+        "pagePath": "pages/owner-login/owner-login",
+        "text": "店主"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

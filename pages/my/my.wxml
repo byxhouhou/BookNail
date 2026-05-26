@@ -1,0 +1,55 @@
+<view class="page-shell my-page">
+  <view class="my-hero">
+    <view>
+      <view class="my-kicker">MY BOOKING</view>
+      <view class="my-title">查询我的预约</view>
+      <view class="my-copy">输入预约时填写的微信号或手机号，查看自己的美甲预约信息。</view>
+    </view>
+  </view>
+
+  <view class="query-panel">
+    <view class="section-title">
+      <text>预约查询</text>
+    </view>
+    <view class="field">
+      <text class="field-label">微信/手机</text>
+      <input value="{{keyword}}" placeholder="请输入微信号或手机号" bindinput="onInput" confirm-type="search" bindconfirm="queryAppointments" />
+    </view>
+    <button class="primary-button" bindtap="queryAppointments">查询预约</button>
+  </view>
+
+  <view wx:if="{{hasSearched}}" class="section">
+    <view class="section-title">
+      <text>查询结果</text>
+      <text class="pill">{{results.length}} 条</text>
+    </view>
+
+    <view wx:if="{{results.length}}" class="appointment-list">
+      <view wx:for="{{results}}" wx:key="id" class="appointment-item">
+        <view class="appointment-main">
+          <view>
+            <view class="appointment-time">{{item.date}} {{item.time}}</view>
+            <view class="appointment-service">{{item.serviceName}}</view>
+            <view wx:if="{{item.priceLabel}}" class="appointment-price">预估：{{item.priceLabel}}</view>
+          </view>
+          <view class="status-tag">已预约</view>
+        </view>
+        <view class="info-row">
+          <text class="info-label">姓名</text>
+          <text>{{item.name}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">微信/手机</text>
+          <text>{{item.phone}}</text>
+        </view>
+        <view wx:if="{{item.note}}" class="appointment-note">{{item.note}}</view>
+        <button class="delete-button" bindtap="cancelAppointment" data-id="{{item.id}}">取消预约</button>
+      </view>
+    </view>
+
+    <view wx:else class="empty-state">
+      <view class="empty-title">没有查到预约</view>
+      <view class="empty-copy">请确认输入内容与预约时填写的一致。</view>
+    </view>
+  </view>
+</view>

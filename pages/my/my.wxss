@@ -1,0 +1,169 @@
+.my-page {
+  padding-bottom: 64rpx;
+}
+
+.my-hero {
+  display: flex;
+  align-items: center;
+  min-height: 250rpx;
+  padding: 34rpx;
+  border-radius: 8rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #c34864 0%, #e99a8f 58%, #f4c48d 100%);
+}
+
+.my-kicker {
+  margin-bottom: 16rpx;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  opacity: 0.9;
+}
+
+.my-title {
+  font-size: 46rpx;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+.my-copy {
+  max-width: 540rpx;
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.query-panel {
+  margin-top: 28rpx;
+  padding: 26rpx;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  min-height: 88rpx;
+  margin-bottom: 18rpx;
+  padding: 0 20rpx;
+  border: 2rpx solid #f1dce2;
+  border-radius: 8rpx;
+  background: #fffafb;
+}
+
+.field-label {
+  flex: 0 0 140rpx;
+  color: #5f5356;
+  font-weight: 700;
+}
+
+.field input {
+  flex: 1;
+  min-height: 84rpx;
+}
+
+.appointment-list {
+  margin-top: 6rpx;
+}
+
+.appointment-item {
+  margin-bottom: 20rpx;
+  padding: 26rpx;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.appointment-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.appointment-time {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.appointment-service {
+  margin-top: 10rpx;
+  color: #d75f7a;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.appointment-price {
+  margin-top: 8rpx;
+  color: #5f5356;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.status-tag {
+  flex: 0 0 auto;
+  padding: 9rpx 16rpx;
+  border-radius: 999rpx;
+  color: #2f7785;
+  background: #e8f5f3;
+  font-size: 23rpx;
+}
+
+.info-row {
+  display: flex;
+  gap: 18rpx;
+  margin-top: 16rpx;
+  color: #5f5356;
+  font-size: 26rpx;
+}
+
+.info-label {
+  flex: 0 0 140rpx;
+  color: #8a7d80;
+}
+
+.appointment-note {
+  margin-top: 16rpx;
+  padding: 18rpx;
+  border-radius: 8rpx;
+  color: #6f6366;
+  background: #fff7f8;
+  font-size: 25rpx;
+  line-height: 1.45;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180rpx;
+  height: 62rpx;
+  margin-top: 20rpx;
+  margin-left: auto;
+  border-radius: 8rpx;
+  color: #d75f7a;
+  background: #fff0f4;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 360rpx;
+  border: 2rpx dashed #e9ccd4;
+  border-radius: 8rpx;
+  background: #ffffff;
+}
+
+.empty-title {
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.empty-copy {
+  margin-top: 14rpx;
+  color: #8a7d80;
+}

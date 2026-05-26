@@ -1,0 +1,105 @@
+<view class="page-shell booking-page">
+  <view class="hero">
+    <view>
+      <view class="hero-kicker">NAIL STUDIO</view>
+      <view class="hero-title">预约你的专属美甲时间</view>
+      <view class="hero-copy">先选择日期和时间，再选择项目。已被占用的时间会同步展示。</view>
+    </view>
+    <view class="hero-badge">
+      <text class="hero-badge-number">{{availableCount}}</text>
+      <text>可约</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text>选择日期</text>
+      <text class="pill">{{selectedDateLabel}}</text>
+    </view>
+    <scroll-view scroll-x class="date-scroll" enable-flex>
+      <view
+        wx:for="{{dateOptions}}"
+        wx:key="value"
+        class="date-item {{selectedDate === item.value ? 'active' : ''}}"
+        bindtap="onSelectDate"
+        data-date="{{item.value}}"
+      >
+        <text class="date-week">{{item.week}}</text>
+        <text class="date-day">{{item.monthDay}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text>时间段</text>
+      <text class="muted small-text">灰色为已占用</text>
+    </view>
+    <view class="time-grid">
+      <view
+        wx:for="{{timeSlots}}"
+        wx:key="time"
+        class="time-slot {{item.booked ? 'booked' : ''}} {{selectedTime === item.time ? 'active' : ''}}"
+        bindtap="onSelectTime"
+        data-time="{{item.time}}"
+        data-booked="{{item.booked}}"
+      >
+        <text>{{item.time}}</text>
+        <text class="slot-status">{{item.booked ? '已占用' : '可约'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text>选择项目</text>
+      <text class="muted small-text">可多选</text>
+    </view>
+    <view class="service-group" wx:for="{{serviceGroups}}" wx:for-item="group" wx:key="id">
+      <view class="service-group-title">{{group.name}}</view>
+      <view class="service-list {{group.singleColumn ? 'single-column' : ''}}">
+        <view
+          wx:for="{{group.items}}"
+          wx:for-item="service"
+          wx:key="id"
+          class="service-item {{service.checked ? 'active' : ''}}"
+          bindtap="onToggleService"
+          data-id="{{service.id}}"
+        >
+          <view class="service-main">
+            <view class="check-dot">{{service.checked ? "✓" : ""}}</view>
+            <view>
+              <view class="service-name">{{service.name}}</view>
+              <view wx:if="{{service.detail}}" class="service-detail">{{service.detail}}</view>
+              <view class="service-meta">{{service.priceLabel}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{selectedServiceNames}}" class="selected-summary">
+      <view class="selected-title">已选项目</view>
+      <view class="selected-names">{{selectedServiceNames}}</view>
+      <view class="selected-price">预估：{{selectedPriceLabel}}</view>
+    </view>
+  </view>
+
+  <view class="section form-panel">
+    <view class="section-title">
+      <text>预约信息</text>
+    </view>
+    <view class="field">
+      <text class="field-label">姓名</text>
+      <input value="{{form.name}}" placeholder="请输入姓名" bindinput="onInput" data-field="name" />
+    </view>
+    <view class="field">
+      <text class="field-label">微信/手机</text>
+      <input value="{{form.phone}}" placeholder="用于确认预约" bindinput="onInput" data-field="phone" />
+    </view>
+    <view class="field textarea-field">
+      <text class="field-label">备注</text>
+      <textarea value="{{form.note}}" maxlength="80" placeholder="钻饰数量、单根位置或其他需求" bindinput="onInput" data-field="note" />
+    </view>
+    <button class="primary-button {{canSubmit ? '' : 'is-disabled'}}" bindtap="submitBooking">确认预约</button>
+  </view>
+</view>
