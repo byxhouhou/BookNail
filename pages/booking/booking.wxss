@@ -36,6 +36,26 @@
   opacity: 0.88;
 }
 
+.share-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 22rpx;
+}
+
+.share-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 156rpx;
+  height: 56rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.72);
+  border-radius: 8rpx;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 23rpx;
+  font-weight: 700;
+}
+
 .hero-badge {
   display: flex;
   flex-direction: column;

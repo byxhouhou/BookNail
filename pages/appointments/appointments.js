@@ -5,8 +5,37 @@ Page({
     appointments: []
   },
 
+  onLoad() {
+    this.enableShareMenu();
+  },
+
+  enableShareMenu() {
+    if (wx.showShareMenu) {
+      wx.showShareMenu({
+        withShareTicket: true,
+        menus: ["shareAppMessage", "shareTimeline"]
+      });
+    }
+  },
+
   onShow() {
+    this.enableShareMenu();
+
     this.loadAppointments();
+  },
+
+  onShareAppMessage() {
+    return {
+      title: "指尖花园美甲预约",
+      path: "/pages/booking/booking"
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: "指尖花园美甲预约",
+      query: ""
+    };
   },
 
   async loadAppointments() {

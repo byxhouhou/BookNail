@@ -7,7 +7,22 @@ Page({
     results: []
   },
 
+  onLoad() {
+    this.enableShareMenu();
+  },
+
+  enableShareMenu() {
+    if (wx.showShareMenu) {
+      wx.showShareMenu({
+        withShareTicket: true,
+        menus: ["shareAppMessage", "shareTimeline"]
+      });
+    }
+  },
+
   onShow() {
+    this.enableShareMenu();
+
     if (this.data.hasSearched) {
       this.queryAppointments();
     }
@@ -17,6 +32,20 @@ Page({
     this.setData({
       keyword: event.detail.value
     });
+  },
+
+  onShareAppMessage() {
+    return {
+      title: "指尖花园美甲预约",
+      path: "/pages/booking/booking"
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: "指尖花园美甲预约",
+      query: ""
+    };
   },
 
   async queryAppointments() {

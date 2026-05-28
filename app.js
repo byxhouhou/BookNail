@@ -47,33 +47,7 @@ App({
         { name: "小钻球", price: 2500, unit: "个" },
         { name: "平底拼钻", min: 2000, max: 5000 }
       ]
-    },
-    seedAppointments: [
-      {
-        id: "seed-1",
-        date: "",
-        time: "13:00",
-        serviceId: "基础项目-纯色,设计效果-法式",
-        serviceName: "纯色 + 法式",
-        priceLabel: "53000₩",
-        name: "已预约客户",
-        phone: "保密",
-        note: "门店预留",
-        createdAt: ""
-      },
-      {
-        id: "seed-2",
-        date: "",
-        time: "15:00",
-        serviceId: "基础项目-甲片延长-半贴,设计效果-猫眼",
-        serviceName: "甲片延长（半贴） + 猫眼",
-        priceLabel: "40000₩",
-        name: "已预约客户",
-        phone: "保密",
-        note: "门店预留",
-        createdAt: ""
-      }
-    ]
+    }
   },
 
   onLaunch() {
@@ -90,10 +64,6 @@ App({
     } else {
       this.globalData.useCloud = false;
     }
-
-    this.ensureSeedAppointments().catch((error) => {
-      console.warn("ensureSeedAppointments failed", error);
-    });
   },
 
   formatDate(offset = 0) {
@@ -103,39 +73,6 @@ App({
     const month = `${date.getMonth() + 1}`.padStart(2, "0");
     const day = `${date.getDate()}`.padStart(2, "0");
     return `${year}-${month}-${day}`;
-  },
-
-  async ensureSeedAppointments() {
-    if (this.globalData.useCloud && wx.cloud) {
-      try {
-        await this.callCloud("ensureAppointmentSeed", {
-          date: this.formatDate(),
-          seedAppointments: this.globalData.seedAppointments
-        });
-      } catch (error) {
-        console.warn("cloud seed failed", error);
-      }
-      return;
-    }
-
-    const key = this.globalData.storageKey;
-    const appointments = wx.getStorageSync(key) || [];
-    const hasSeed = appointments.some((item) => `${item.id}`.indexOf("seed-") === 0);
-
-    if (hasSeed) {
-      return;
-    }
-
-    const today = this.formatDate();
-    const now = new Date().toLocaleString("zh-CN");
-    const seed = this.globalData.seedAppointments.map((item) => ({
-      ...item,
-      date: today,
-      createdAt: now,
-      isSeed: true
-    }));
-
-    wx.setStorageSync(key, seed.concat(appointments));
   },
 
   async callCloud(type, data = {}) {

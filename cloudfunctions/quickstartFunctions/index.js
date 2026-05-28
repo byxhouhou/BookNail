@@ -121,43 +121,9 @@ const loginOwner = async (event) => {
   });
 };
 
-const ensureAppointmentSeed = async (event) => {
+const ensureAppointmentSeed = async () => {
   await ensureCollection(APPOINTMENTS_COLLECTION);
   await ensureOwnerSeed();
-
-  const { date, seedAppointments = [] } = event.data || {};
-  if (!date || !seedAppointments.length) {
-    return success([]);
-  }
-
-  const seedResult = await db
-    .collection(APPOINTMENTS_COLLECTION)
-    .where({
-      isSeed: true,
-      date
-    })
-    .limit(1)
-    .get();
-
-  if (seedResult.data.length) {
-    return success(seedResult.data);
-  }
-
-  const now = new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
-
-  for (let i = 0; i < seedAppointments.length; i++) {
-    const item = seedAppointments[i];
-    await db.collection(APPOINTMENTS_COLLECTION).add({
-      data: {
-        ...item,
-        date,
-        createdAt: now,
-        isSeed: true,
-        isBlocked: false
-      }
-    });
-  }
-
   return success([]);
 };
 

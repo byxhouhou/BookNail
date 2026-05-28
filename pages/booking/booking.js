@@ -23,6 +23,8 @@ Page({
   },
 
   onLoad() {
+    this.enableShareMenu();
+
     const dateOptions = getDateOptions(10);
     const selectedDate = dateOptions[0].value;
     const selectedDateLabel = `${dateOptions[0].week} ${dateOptions[0].monthDay}`;
@@ -38,7 +40,18 @@ Page({
     this.refreshSlots();
   },
 
+  enableShareMenu() {
+    if (wx.showShareMenu) {
+      wx.showShareMenu({
+        withShareTicket: true,
+        menus: ["shareAppMessage", "shareTimeline"]
+      });
+    }
+  },
+
   onShow() {
+    this.enableShareMenu();
+
     if (this.data.selectedDate) {
       this.refreshSlots();
     }
@@ -295,6 +308,41 @@ Page({
     }
 
     return "";
+  },
+
+  onShareAppMessage() {
+    return {
+      title: "指尖花园美甲预约",
+      path: "/pages/booking/booking"
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: "指尖花园美甲预约",
+      query: ""
+    };
+  },
+
+  copyShareLink() {
+    wx.setClipboardData({
+      data: "指尖花园美甲预约：/pages/booking/booking",
+      success: () => {
+        wx.showToast({
+          title: "已复制预约入口",
+          icon: "success"
+        });
+      }
+    });
+  },
+
+  showTimelineShareTip() {
+    wx.showModal({
+      title: "分享到朋友圈",
+      content: "请点击右上角“...”菜单，选择“分享到朋友圈”。",
+      showCancel: false,
+      confirmColor: "#d75f7a"
+    });
   },
 
   async submitBooking() {

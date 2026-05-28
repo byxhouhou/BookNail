@@ -4,6 +4,11 @@
       <view class="hero-kicker">NAIL STUDIO</view>
       <view class="hero-title">预约你的专属美甲时间</view>
       <view class="hero-copy">先选择日期和时间，再选择项目。已被占用的时间会同步展示。</view>
+      <view class="share-actions">
+        <button class="share-action-button" open-type="share">分享好友</button>
+        <button class="share-action-button" bindtap="showTimelineShareTip">朋友圈</button>
+        <button class="share-action-button" bindtap="copyShareLink">复制入口</button>
+      </view>
     </view>
     <view class="hero-badge">
       <text class="hero-badge-number">{{availableCount}}</text>

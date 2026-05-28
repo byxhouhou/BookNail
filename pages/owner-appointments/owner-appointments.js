@@ -12,6 +12,8 @@ Page({
   },
 
   onLoad() {
+    this.enableShareMenu();
+
     const dateOptions = getDateOptions(10);
     const selectedRestDate = dateOptions[0].value;
 
@@ -23,7 +25,18 @@ Page({
     });
   },
 
+  enableShareMenu() {
+    if (wx.showShareMenu) {
+      wx.showShareMenu({
+        withShareTicket: true,
+        menus: ["shareAppMessage", "shareTimeline"]
+      });
+    }
+  },
+
   onShow() {
+    this.enableShareMenu();
+
     if (!app.isOwnerLoggedIn()) {
       wx.switchTab({
         url: "/pages/owner-login/owner-login"
@@ -64,9 +77,11 @@ Page({
   async removeExpiredAppointments(appointments) {
     const cutoffDate = app.formatDate(-10);
     const expired = appointments.filter((item) => item.date < cutoffDate && !item.isSeed);
+    const seedAppointments = appointments.filter((item) => item.isSeed || `${item.id}`.indexOf("seed-") === 0);
+    const toDelete = seedAppointments.concat(expired);
 
-    for (let i = 0; i < expired.length; i++) {
-      await app.deleteAppointment(expired[i].id);
+    for (let i = 0; i < toDelete.length; i++) {
+      await app.deleteAppointment(toDelete[i].id);
     }
   },
 
@@ -119,6 +134,20 @@ Page({
     this.setData({
       selectedRestTime: event.currentTarget.dataset.time
     });
+  },
+
+  onShareAppMessage() {
+    return {
+      title: "指尖花园美甲预约",
+      path: "/pages/booking/booking"
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: "指尖花园美甲预约",
+      query: ""
+    };
   },
 
   setRestSlot() {
